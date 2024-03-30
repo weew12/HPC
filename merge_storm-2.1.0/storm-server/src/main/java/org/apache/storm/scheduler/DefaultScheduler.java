@@ -18,7 +18,7 @@
 
 package org.apache.storm.scheduler;
 
-import org.apache.storm.scheduler.adaptive.OnlineScheduler;
+//import org.apache.storm.scheduler.adaptive.OnlineScheduler;
 import org.apache.storm.utils.Utils;
 
 import java.util.*;
@@ -27,32 +27,27 @@ import java.util.Map.Entry;
 public class DefaultScheduler implements IScheduler {
 
 
-    private static  boolean FirstRun = false;
+    private static boolean FirstRun = false;
 
-    public static final  Topologies topologies= new Topologies();
+    public static final Topologies topologies = new Topologies();
 
-    public static OnlineScheduler onlinescheduler = new OnlineScheduler();
+//    public static OnlineScheduler onlinescheduler = new OnlineScheduler();
 
-    public static  Cluster mycluster = null;
+    public static Cluster mycluster = null;
 
-    public static Double CpuUsage=0.0;
+    public static Double CpuUsage = 0.0;
 
     //public static   Cluster cluster = null;
 
 
-
-   // private static  boolean Firstrun = false;
+    // private static  boolean Firstrun = false;
 
 
     public class MyClass extends Thread {
-        public void run(){
+        public void run() {
             System.out.println("MyClass running");
         }
     }
-
-
-
-
 
 
     private static Set<WorkerSlot> badSlots(Map<WorkerSlot, List<ExecutorDetails>> existingSlots, int numExecutors, int numWorkers) {
@@ -99,8 +94,6 @@ public class DefaultScheduler implements IScheduler {
     public static void defaultSchedule(Topologies topologies, Cluster cluster) {
 
 
-
-
         /////// hamid
 
         for (TopologyDetails topology : cluster.needsSchedulingTopologies()) {
@@ -129,10 +122,6 @@ public class DefaultScheduler implements IScheduler {
         }
 
 
-
-
-
-
     }
 
     @Override
@@ -140,10 +129,9 @@ public class DefaultScheduler implements IScheduler {
         //noop
     }
 
-    public static void getWorkloadUsageInfo( Map<String, Map<String, String>> workloadUsageInfo) {
+    public static void getWorkloadUsageInfo(Map<String, Map<String, String>> workloadUsageInfo) {
 
         //System.out.println(":::::::::DefaultScheduler:::::::::getWorkloadUsageInfo::::::::" + workloadUsageInfo);
-
 
 
     }
@@ -152,7 +140,7 @@ public class DefaultScheduler implements IScheduler {
     @Override
     public void schedule(Topologies topologies, Cluster cluster) {
 
-        mycluster =cluster;
+        mycluster = cluster;
 
         System.out.println(".............defaultSchedule.................  ");
         defaultSchedule(topologies, mycluster);     /// when using RL we uncomment this this line
@@ -161,11 +149,9 @@ public class DefaultScheduler implements IScheduler {
         int num_worker = UsedSlots.size();
 
 
-
         //if (!FirstRun && (num_worker > 0)) {
 
-        if (!FirstRun ) {
-
+        if (!FirstRun) {
 
 
             System.out.println(".First Run DataManager.......");
@@ -175,12 +161,11 @@ public class DefaultScheduler implements IScheduler {
                 public void run() {
 
 
-                    BenchMarkSubmitter benchMarkSubmitter =new BenchMarkSubmitter();
+                    BenchMarkSubmitter benchMarkSubmitter = new BenchMarkSubmitter();
                     benchMarkSubmitter.benchMarkSubmitter();
 
                 }
             });
-
 
 
             Thread threadGetBenchMarkInfor = new Thread(new Runnable() {
@@ -188,9 +173,7 @@ public class DefaultScheduler implements IScheduler {
                 public void run() {
 
 
-
-
-                    BenchMarkGetInfo  benchMarkInfo= new BenchMarkGetInfo();
+                    BenchMarkGetInfo benchMarkInfo = new BenchMarkGetInfo();
                     benchMarkInfo.benchMarkGetInfo();
 
 
@@ -202,9 +185,7 @@ public class DefaultScheduler implements IScheduler {
                 public void run() {
 
 
-
-
-                    GetExecuterDetails  getExecuterDetails= new GetExecuterDetails();
+                    GetExecuterDetails getExecuterDetails = new GetExecuterDetails();
                     getExecuterDetails.getExecuterDetailsDaemon();
 
 
@@ -216,46 +197,30 @@ public class DefaultScheduler implements IScheduler {
                 public void run() {
 
 
-
-
-                    Hmetrics  hmetrics= new Hmetrics();
-                    hmetrics.display_metrics(topologies,cluster);
+                    Hmetrics hmetrics = new Hmetrics();
+                    hmetrics.display_metrics(topologies, cluster);
 
 
                 }
             });
 
 
-            FirstRun=true;
+            FirstRun = true;
         }
 
 
-
-
-
     }
 
 
-
-
-
-
-    public static  Cluster getCluster() {
+    public static Cluster getCluster() {
         return mycluster;
     }
-
-
-
-
-
-
 
 
     @Override
     public Map<String, Map<String, Double>> config() {
         return new HashMap<>();
     }
-
 
 
 }

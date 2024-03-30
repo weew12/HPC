@@ -175,7 +175,10 @@ public final class VersionInfo {
      * @return the version number of the build.
      */
     public static String getVersion() {
-        System.out.println("++++++++++++++++::Supervisor::::VersionInfo.getVersion();:::::: ++++++++++++++++"+stormVersion);
+//        System.out.println("++++++++++++++++::Supervisor::::VersionInfo.getVersion();:::::: ++++++++++++++++"+stormVersion);
+//        weew12 start
+        System.out.println("++++++++++++++++::Supervisor::::VersionInfo.getVersion();:::::: ++++++++++++++++");
+//        weew12 end
         return OUR_FULL_VERSION.getVersion();
     }
 

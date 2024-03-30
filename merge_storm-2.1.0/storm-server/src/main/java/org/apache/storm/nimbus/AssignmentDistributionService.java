@@ -258,6 +258,8 @@ public class AssignmentDistributionService implements Closeable {
 
         @Override
         public void run() {
+
+            // System.out.println("++++++++++++++++::Assignment:::::: +++++++++11+++++++");
             while (service.isActive()) {
                 try {
                     NodeAssignments nodeAssignments = this.service.nextAssignments(queueIndex);
@@ -274,6 +276,8 @@ public class AssignmentDistributionService implements Closeable {
         }
 
         private void sendAssignmentsToNode(NodeAssignments assignments) {
+
+            //  System.out.println("++++++++++++++++::Assignment::::00:: ++++++++++++++++");
             if (this.service.isLocalMode) {
                 //local node
                 Supervisor supervisor = this.service.localSupervisors.get(assignments.getNode());
@@ -286,7 +290,7 @@ public class AssignmentDistributionService implements Closeable {
             } else {
                 // distributed mode
                 try (SupervisorClient client = SupervisorClient.getConfiguredClient(service.getConf(),
-                                                                                    assignments.getHost(), assignments.getServerPort())) {
+                        assignments.getHost(), assignments.getServerPort())) {
                     try {
                         client.getIface().sendSupervisorAssignments(assignments.getAssignments());
                     } catch (Exception e) {

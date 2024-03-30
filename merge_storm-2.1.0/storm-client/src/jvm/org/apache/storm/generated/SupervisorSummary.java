@@ -55,8 +55,6 @@ public class SupervisorSummary implements org.apache.storm.thrift.TBase<Supervis
   private double fragmented_mem; // optional
   private double fragmented_cpu; // optional
 
-
-
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.storm.thrift.TFieldIdEnum {
     HOST((short)1, "host"),
@@ -190,7 +188,6 @@ public class SupervisorSummary implements org.apache.storm.thrift.TBase<Supervis
 
   public SupervisorSummary() {
     this.version = "VERSION_NOT_PROVIDED";
-    //System.out.println("++++++++++++++++::Hmetrics::::display_metrics:::::: ++++++++++++++++");
 
   }
 
@@ -358,8 +355,6 @@ public class SupervisorSummary implements org.apache.storm.thrift.TBase<Supervis
 
   @org.apache.storm.thrift.annotation.Nullable
   public java.lang.String get_supervisor_id() {
-
-   // System.out.println("++++++++++++++++::SupervisorSummary::::get_supervisor_id:::::: ++++++++++++++++"+supervisor_id);
     return this.supervisor_id;
   }
 
@@ -384,7 +379,6 @@ public class SupervisorSummary implements org.apache.storm.thrift.TBase<Supervis
 
   @org.apache.storm.thrift.annotation.Nullable
   public java.lang.String get_version() {
-    //System.out.println("++++++++++++++++::SupervisorSummary::::get_version:::::: ++++++++++++++++"+version);
     return this.version;
   }
 

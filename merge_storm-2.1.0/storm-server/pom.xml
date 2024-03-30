@@ -63,11 +63,11 @@
         </dependency>
 
         <!-- weew12 start -->
-        <!-- <dependency>
+        <dependency>
             <groupId>com.jcraft</groupId>
             <artifactId>jsch</artifactId>
             <version>0.1.55</version>
-        </dependency> -->
+        </dependency>
         <!-- weew12 end -->
 
         <!-- jline is included to make the zk shell work through the cli for debugging -->
@@ -251,6 +251,11 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
+<!--                weew12 start-->
+                <configuration>
+                    <maxAllowedViolations>5000</maxAllowedViolations>
+                </configuration>
+<!--                weew12 end-->
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

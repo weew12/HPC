@@ -159,7 +159,6 @@ public class EvenScheduler implements IScheduler {
             Map<WorkerSlot, List<ExecutorDetails>> nodePortToExecutors = Utils.reverseMap(newAssignment);
 
 
-
             for (Map.Entry<WorkerSlot, List<ExecutorDetails>> entry : nodePortToExecutors.entrySet()) {
                 WorkerSlot nodePort = entry.getKey();
 
@@ -170,19 +169,16 @@ public class EvenScheduler implements IScheduler {
 
                 for (ExecutorDetails lst : executors) {
 
-                System.out.println("........................Even Scheduler Assigned.............................." );
-                cluster.assign(nodePort, topologyId, executors);
+                    System.out.println("........................Even Scheduler Assigned..............................");
+                    cluster.assign(nodePort, topologyId, executors);
 
 
-
-
-
+                }
             }
+
+
         }
-
-
     }
-
 
     @Override
     public void prepare(Map<String, Object> conf) {
